@@ -1,0 +1,5 @@
+SQL Queries in Oracle, select min(salary) from (select * from (select * from employee order by SALARY desc) where rownum < N + 1)
+
+SQL Queries in SQL Server, select min(SALARY) from (select top N * from employee) a
+
+SQL Queries in MySQL, select min(SALARY) from (select * from employee order by salary desc limit N) a
