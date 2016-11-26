@@ -1,0 +1,21 @@
+SQL> SELECT	UPPER(o.order_mode) order_mode
+  2  		,SUM(DECODE(o.order_status, 0, o.order_total)) stat_0
+  3  		,SUM(DECODE(o.order_status, 1, o.order_total)) stat_1
+  4  		,SUM(DECODE(o.order_status, 2, o.order_total)) stat_2
+  5  		,SUM(DECODE(o.order_status, 3, o.order_total)) stat_3
+  6  		,SUM(DECODE(o.order_status, 4, o.order_total)) stat_4
+  7  		,SUM(DECODE(o.order_status, 5, o.order_total)) stat_5
+  8  		,SUM(DECODE(o.order_status, 6, o.order_total)) stat_6
+  9  		,SUM(DECODE(o.order_status, 7, o.order_total)) stat_7
+ 10  		,SUM(DECODE(o.order_status, 8, o.order_total)) stat_8
+ 11  		,SUM(DECODE(o.order_status, 9, o.order_total)) stat_9
+ 12  		,SUM(DECODE(o.order_status, 10, o.order_total)) stat_10
+ 13  FROM	orders o
+ 14  GROUP BY o.order_mode
+ 15  ORDER BY 1
+ 16  /
+
+ORDER_MODE     STAT_0     STAT_1     STAT_2     STAT_3     STAT_4     STAT_5     STAT_6     STAT_7     STAT_8     STAT_9    STAT_10
+---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+DIRECT       163131.3   227569.5   166169.5   206659.4    56352.5   172586.2     115968    33617.1   545300.5   205674.2      10601
+ONLINE        25976.7              103834.4    56381.7   700068.1   183261.2    90411.8              322192.5    57062.4   225236.7
