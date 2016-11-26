@@ -1,0 +1,33 @@
+SQL> SELECT	o.order_mode
+  2          ,o.order_status
+  3          ,SUM(o.order_total) order_total
+  4  FROM	orders o
+  5  GROUP BY o.order_mode, o.order_status
+  6  ORDER BY o.order_mode
+  7          ,o.order_status
+  8  /
+ 
+ORDER_MODE ORDER_STATUS ORDER_TOTAL
+---------- ------------ -----------
+direct                0    163131.3
+direct                1    227569.5
+direct                2    166169.5
+direct                3    206659.4
+direct                4     56352.5
+direct                5    172586.2
+direct                6      115968
+direct                7     33617.1
+direct                8    545300.5
+direct                9    205674.2
+direct               10       10601
+online                0     25976.7
+online                2    103834.4
+online                3     56381.7
+online                4    700068.1
+online                5    183261.2
+online                6     90411.8
+online                8    322192.5
+online                9     57062.4
+online               10    225236.7
+ 
+20 rows selected
