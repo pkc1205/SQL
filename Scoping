@@ -1,0 +1,56 @@
+The following example illustrates block structure and scope rules. An outer block declares two variables named x and counter and loops four times. Inside this loop is a sub-block that also declares a variable named x. The values inserted into the temp table show that the two x's are indeed different.
+
+Input Table
+
+Not applicable.
+
+PL/SQL Block
+
+-- available online in file 'sample3'
+DECLARE
+   x NUMBER := 0;
+   counter NUMBER := 0;
+BEGIN
+   FOR i IN 1..4 LOOP
+      x := x + 1000;
+      counter := counter + 1;
+      INSERT INTO temp VALUES (x, counter, 'in OUTER loop');
+      /* start an inner block */
+      DECLARE
+         x NUMBER := 0;  -- this is a local version of x
+      BEGIN
+         FOR i IN 1..4 LOOP
+            x := x + 1;  -- this increments the local x
+            counter := counter + 1;
+            INSERT INTO temp VALUES (x, counter, 'inner loop');
+         END LOOP;
+      END;
+   END LOOP;
+   COMMIT;
+END;
+Output Table
+
+SQL> SELECT * FROM temp ORDER BY col2;
+
+NUM_COL1 NUM_COL2  CHAR_COL
+-------- --------  -------------
+    1000        1  in OUTER loop
+       1        2  inner loop
+       2        3  inner loop
+       3        4  inner loop
+       4        5  inner loop
+    2000        6  in OUTER loop
+       1        7  inner loop
+       2        8  inner loop
+       3        9  inner loop
+       4       10  inner loop
+    3000       11  in OUTER loop
+       1       12  inner loop
+       2       13  inner loop
+       3       14  inner loop
+      4        15  inner loop
+    4000       16  in OUTER loop
+       1       17  inner loop
+       2       18  inner loop
+       3       19  inner loop
+       4       20  inner loop
