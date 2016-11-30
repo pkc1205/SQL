@@ -6,7 +6,7 @@ Stella	20
 Sophia	40
 Greg	50
 Jeff	20
-we would type,
+
 
 SELECT a1.Name, a1.Sales, SUM(a2.Sales) Running_Total 
 FROM Total_Sales a1, Total_Sales a2 
