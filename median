@@ -1,0 +1,21 @@
+Table Total_Sales
+Name	Sales
+John	10
+Jennifer	15
+Stella	20
+Sophia	40
+Greg	50
+Jeff	20
+we would type,
+
+SELECT Sales Median FROM 
+(SELECT a1.Name, a1.Sales, COUNT(a1.Sales) Rank 
+FROM Total_Sales a1, Total_Sales a2 
+WHERE a1.Sales < a2.Sales OR (a1.Sales=a2.Sales AND a1.Name <= a2.Name) 
+group by a1.Name, a1.Sales 
+order by a1.Sales desc) a3 
+WHERE Rank = (SELECT (COUNT(*)+1) DIV 2 FROM Total_Sales);
+Result:
+
+Median
+20
