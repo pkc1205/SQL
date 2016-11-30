@@ -1,0 +1,24 @@
+Table Total_Sales
+Name	Sales
+John	10
+Jennifer	15
+Stella	20
+Sophia	40
+Greg	50
+Jeff	20
+we would type,
+
+SELECT a1.Name, a1.Sales, a1.Sales/(SELECT SUM(Sales) FROM Total_Sales) Pct_To_Total 
+FROM Total_Sales a1, Total_Sales a2 
+WHERE a1.Sales <= a2.sales or (a1.Sales=a2.Sales and a1.Name = a2.Name) 
+GROUP BY a1.Name, a1.Sales 
+ORDER BY a1.Sales DESC, a1.Name DESC;
+Result:
+
+Name	Sales	Pct_To_Total
+Greg	50	0.3226
+Sophia	40	0.2581
+Stella	20	0.1290
+Jeff	20	0.1290
+Jennifer	15	0.0968
+John	10	0.0645
