@@ -1,0 +1,31 @@
+Displaying the rank associated with each row is a common request. Some databases (such as SQL Server and Oracle) provide a RANK function that can easily achieve this, though this is not true for all databases (for example, MySQL does not have a RANK function). In this section, we discuss how we can show the ranking in the absence of such a function.
+
+The general idea to display rank in SQL is to do a self-join, then list out the results in order, and finally do a count on the number of records that's listed ahead of (and including) the record of interest. Let's use an example to illustrate. Say we have the following table,
+
+Table Total_Sales
+Name	Sales
+John	10
+Jennifer	15
+Stella	20
+Sophia	40
+Greg	50
+Jeff	20
+we would type,
+
+SELECT a1.Name, a1.Sales, COUNT (a2.Sales) Sales_Rank 
+FROM Total_Sales a1, Total_Sales a2 
+WHERE a1.Sales < a2.Sales OR (a1.Sales=a2.Sales AND a1.Name = a2.Name) 
+GROUP BY a1.Name, a1.Sales 
+ORDER BY a1.Sales DESC, a1.Name DESC;
+Result:
+
+Name	Sales	Sales_Rank
+Greg	50	1
+Sophia	40	2
+Stella	20	3
+Jeff	20	3
+Jennifer	15	5
+John	10	6
+Please note that in this case, there WHERE clause accounts for the possibility that multiple rows of data have the same value of in the Sales column. If we know for sure that there are no duplicate values in the Sales column, we can change the WHERE clause to:
+
+WHERE a1.Sales <= a2.Sales
