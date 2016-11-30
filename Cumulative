@@ -1,0 +1,26 @@
+To display cumulative percent to total in SQL, we use the same idea as we saw in the Percent To Total section. The difference is that we want the cumulative percent to total, not the percentage contribution of each individual row. Let's use the following example to illuatrate:
+
+Table Total_Sales
+Name	Sales
+John	10
+Jennifer	15
+Stella	20
+Sophia	40
+Greg	50
+Jeff	20
+we would type,
+
+SELECT a1.Name, a1.Sales, SUM(a2.Sales)/(SELECT SUM(Sales) FROM Total_Sales) Pct_To_Total 
+FROM Total_Sales a1, Total_Sales a2 
+WHERE a1.Sales <= a2.sales or (a1.Sales=a2.Sales and a1.Name = a2.Name) 
+GROUP BY a1.Name, a1.Sales 
+ORDER BY a1.Sales DESC, a1.Name DESC;
+Result:
+
+Name	Sales	Pct_To_Total
+Greg	50	0.3226
+Sophia	40	0.5806
+Stella	20	0.7097
+Jeff	20	0.8387
+Jennifer	15	0.9355
+John	10	1.0000
