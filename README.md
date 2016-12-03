@@ -1,6 +1,8 @@
 # SQL Basic Queries
 Nth Salary
 JOIN GROUP BY
-# SQL Advanced Queries
+Scoping
 TRANSPOSE
+cursors
+# SQL Advanced Queries
 # SQL Expert Queries
