@@ -5,4 +5,7 @@ Scoping
 TRANSPOSE
 cursors
 # SQL Advanced Queries
+Embeded SQL
+
+
 # SQL Expert Queries
