@@ -8,6 +8,6 @@
 #rank 
 #total to percent
 # SQL Advanced Queries
-Embeded SQL
+ #Embeded SQL
 
 # SQL Expert Queries
